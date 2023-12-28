@@ -8,21 +8,34 @@ import FavoriteContext from "../store/SectorContext";
 export default function SubSectorSelect() {
   const favCard = React.useContext(FavoriteContext);
   const [age, setAge] = React.useState("");
-  const [subSector, setsubSector] = React.useState([]);
+  const [subSector, setSubSector] = React.useState([]);
+
   React.useEffect(() => {
-   
-    if (favCard.selection.length > 0) {
-      fetch(
-        `https://searchartback-production-dc78.up.railway.app/api/subsectors/?sector=${favCard.selection}`
-      )
-        .then((response) => response.json())
-        .then((responseData) => setsubSector(responseData));
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          `https://searchartback-production-dc78.up.railway.app/api/subsectors/?sector=${favCard.selection}`
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setSubSector(data);
+      } catch (error) {
+        console.error("Error fetching subsectors:", error);
+      }
     }
-  }, [favCard.selection]);
+
+    if (favCard.selection) {
+      fetchData();
+    }
+  }, [subSector]);
   const handleChange = (event) => {
     const selectedValue = event.target.value;
     setAge(selectedValue);
+    favCard.filteredSelection = selectedValue;
   };
+
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -53,8 +66,10 @@ export default function SubSectorSelect() {
             borderRadius: "7px",
           }}
         >
-          {subSector?.map((subSector) => (
-            <MenuItem value={subSector}>{subSector}</MenuItem>
+          {subSector.map((subSec) => (
+            <MenuItem  value={subSec}>
+              {subSec}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

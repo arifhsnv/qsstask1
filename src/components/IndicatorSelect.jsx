@@ -1,13 +1,21 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 export default function IndicatorSelect() {
   const [age, setAge] = React.useState("");
-
+  const [indicator, setindicator] = React.useState([]);
+  React.useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(
+          "https://searchartback-production-dc78.up.railway.app/api/indicators/?subsector=Productivity%20and%20Labor%20Market"
+        );
+      } catch (error) {}
+    }
+  }, []);
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -43,8 +51,6 @@ export default function IndicatorSelect() {
           }}
         >
           <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
     </Box>

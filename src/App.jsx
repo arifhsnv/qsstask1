@@ -9,7 +9,9 @@ function App() {
 
   return (
     <>
-      <FavoriteContext.Provider value={{ selection: [], filteredSelection:[] }}>
+      <FavoriteContext.Provider
+        value={{ selection: [], filteredSelection: [] }}
+      >
         <div className="container">
           <Selection />
         </div>
