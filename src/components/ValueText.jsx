@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import TextField from "@mui/material/TextField";
-
+import { Typography } from "@mui/material";
 function valuetext(value) {
   return `${value}°C`;
 }
@@ -25,7 +25,14 @@ export default function MinimumDistanceSlider() {
   };
 
   return (
-    <Box sx={{ width: 300, marginRight: "20px", display: "flex" }}>
+    <Box
+      sx={{
+        width: 300,
+        marginRight: "20px",
+        display: "flex",
+        marginTop: "20px",
+      }}
+    >
       <input
         style={{
           width: "46px",
@@ -51,6 +58,7 @@ export default function MinimumDistanceSlider() {
         getAriaValueText={valuetext}
         disableSwap
       />
+
       <input
         style={{
           width: "46px",
@@ -68,6 +76,20 @@ export default function MinimumDistanceSlider() {
         }}
         type="number"
       />
+      <Typography
+        sx={{
+          position: "absolute",
+          color: "#A7B4CA",
+          fontFamily: "Monrope",
+          fontSize: "16px",
+          fontStyle: "normal",
+          fontWeight: "500",
+          lineHeight: "normal",
+          top: "46px",
+        }}
+      >
+        Rank
+      </Typography>
     </Box>
   );
 }

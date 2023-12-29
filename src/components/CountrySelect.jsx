@@ -50,6 +50,7 @@ export default function CountrySelect() {
             border: "1px solid #4A628A",
             backgroundColor: "#293F64",
             borderRadius: "7px",
+            color: "#A7B4CA",
           }}
         >
           {country.map((item) => (

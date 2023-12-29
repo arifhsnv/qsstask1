@@ -21,6 +21,7 @@ export default function SectorSelect() {
     favCard.selection = selectedSector;
     console.log(selectedSector);
   };
+  console.log(favCard.selection)
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

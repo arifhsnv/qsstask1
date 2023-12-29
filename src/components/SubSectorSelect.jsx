@@ -16,11 +16,13 @@ export default function SubSectorSelect() {
         const response = await fetch(
           `https://searchartback-production-dc78.up.railway.app/api/subsectors/?sector=${favCard.selection}`
         );
+        console.log(response)
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setSubSector(data);
+        
       } catch (error) {
         console.error("Error fetching subsectors:", error);
       }
@@ -29,7 +31,7 @@ export default function SubSectorSelect() {
     if (favCard.selection) {
       fetchData();
     }
-  }, [subSector]);
+  }, [favCard.selection]);
   const handleChange = (event) => {
     const selectedValue = event.target.value;
     setAge(selectedValue);
