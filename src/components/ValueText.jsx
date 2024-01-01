@@ -59,8 +59,8 @@ export default function MinimumDistanceSlider() {
         disableSwap
       />
 
-      <input
-        style={{
+      <TextField
+        sx={{
           width: "46px",
           height: "38px",
           borderRadius: "6px",

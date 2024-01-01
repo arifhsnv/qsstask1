@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import "./App.css";
 import Selection from "./components/Selection.jsx";
 import FavoriteContext from "./store/SectorContext.js";
-import RankContainer from "./components/RankContainer.jsx";
+import CountryDetailsContainer from "./components/CountryDetailsContainer.jsx";
 function App() {
   const favCard = useContext(FavoriteContext);
 
@@ -15,11 +15,16 @@ function App() {
           selection: [],
           filteredSelection: [],
           handleFilteredSector: (event) => {},
+          flagsForCountry: [],
+          allCountry: [],
+          yearData: [],
+          indicatorData: "",
+          yearData: "",
         }}
       >
         <div className="container">
           <Selection />
-          <RankContainer />
+          <CountryDetailsContainer />
         </div>
       </FavoriteContext.Provider>
     </>

@@ -6,9 +6,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 import axios from "axios";
+import FavoriteContext from "../store/SectorContext";
 export default function YearSelect() {
   const [age, setAge] = React.useState("");
   const [years, setyears] = React.useState([]);
+  const favCard = React.useContext(FavoriteContext);
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,7 +27,9 @@ export default function YearSelect() {
   }, []);
 
   const handleChange = (event) => {
+    const yearValue = event.target.value;
     setAge(event.target.value);
+    favCard.yearData = yearValue;
   };
 
   return (
@@ -40,7 +44,6 @@ export default function YearSelect() {
             fontStyle: "normal",
             fontWeight: "500",
             lineHeight: "normal",
-           
           }}
         >
           Year

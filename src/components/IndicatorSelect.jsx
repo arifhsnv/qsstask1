@@ -7,7 +7,6 @@ import { Typography } from "@mui/material";
 import FavoriteContext from "../store/SectorContext.js";
 export default function IndicatorSelect() {
   const favCard = React.useContext(FavoriteContext);
-  console.log(favCard);
   const [age, setAge] = React.useState("");
   const [indicator, setindicator] = React.useState([]);
   React.useEffect(() => {
@@ -25,10 +24,16 @@ export default function IndicatorSelect() {
         console.error(error);
       }
     }
-    fetchData();
+
+    if (favCard.filteredSelection) {
+      fetchData();
+    }
   }, [indicator]);
   const handleChange = (event) => {
     setAge(event.target.value);
+    const selectedIndicator = event.target.value;
+
+    favCard.indicatorData = selectedIndicator;
   };
 
   return (
@@ -61,7 +66,9 @@ export default function IndicatorSelect() {
             borderRadius: "7px",
           }}
         >
-          {indicator.map((indicator) => <MenuItem value={indicator}>{indicator}</MenuItem>)}
+          {indicator.map((indicator) => (
+            <MenuItem value={indicator}>{indicator}</MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Box>

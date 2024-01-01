@@ -9,7 +9,6 @@ export default function SectorSelect() {
   const favCard = React.useContext(FavoriteContext);
   const [age, setAge] = React.useState("");
   const [sector, setsector] = React.useState([]);
-
   React.useEffect(() => {
     fetch("https://searchartback-production-dc78.up.railway.app/api/sectors/")
       .then((response) => response.json())
@@ -19,9 +18,8 @@ export default function SectorSelect() {
     const selectedSector = event.target.value;
     setAge(selectedSector);
     favCard.selection = selectedSector;
-    console.log(selectedSector);
+    favCard.handleFilteredSector(event.target.value);
   };
-  console.log(favCard.selection)
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -53,9 +51,7 @@ export default function SectorSelect() {
           }}
         >
           {sector.map((item) => (
-            <MenuItem  value={item}>
-              {item}
-            </MenuItem>
+            <MenuItem value={item}>{item}</MenuItem>
           ))}
         </Select>
       </FormControl>

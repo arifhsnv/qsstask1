@@ -4,7 +4,9 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
+import FavoriteContext from "../store/SectorContext";
 export default function CountrySelect() {
+  const favCard = React.useContext(FavoriteContext);
   const [age, setAge] = React.useState("");
   const [country, setcountry] = React.useState([]);
   React.useEffect(() => {
@@ -18,10 +20,18 @@ export default function CountrySelect() {
       console.log(error);
     }
   }, []);
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
+  const handleAllCountry = () => {
+    favCard.allCountry = country;
+    setAge("");
+  };
+  const handleChange = (event) => {
+    const selectedCountry = event.target.value;
+    setAge(selectedCountry);
+    if (selectedCountry === "") {
+      handleAllCountry();
+    }
+  };
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -53,6 +63,7 @@ export default function CountrySelect() {
             color: "#A7B4CA",
           }}
         >
+          <MenuItem onClick={handleAllCountry}>(All)</MenuItem>
           {country.map((item) => (
             <MenuItem value={item}>{item}</MenuItem>
           ))}
