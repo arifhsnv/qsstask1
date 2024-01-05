@@ -35,7 +35,6 @@ export default function IndicatorSelect() {
 
     favCard.indicatorData = selectedIndicator;
   };
-
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

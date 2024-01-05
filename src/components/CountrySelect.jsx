@@ -1,36 +1,38 @@
-import * as React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Typography } from "@mui/material";
 import FavoriteContext from "../store/SectorContext";
-export default function CountrySelect() {
-  const favCard = React.useContext(FavoriteContext);
-  const [age, setAge] = React.useState("");
-  const [country, setcountry] = React.useState([]);
-  React.useEffect(() => {
-    try {
-      fetch(
-        "https://searchartback-production-dc78.up.railway.app/api/country/?indicator=Gross%20Domestic%20Product%20billions%20of%20U.S.%20dollars"
-      )
-        .then((response) => response.json())
-        .then((responseData) => setcountry(responseData));
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
-  const handleAllCountry = () => {
-    favCard.allCountry = country;
-    setAge("");
-  };
+export default function CountrySelect() {
+  const favCard = useContext(FavoriteContext);
+  const [age, setAge] = useState("");
+  const [country, setCountry] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://searchartback-production-dc78.up.railway.app/api/country/?indicator=${favCard.indicatorData}`
+        );
+        const responseData = await response.json();
+        setCountry(responseData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [country]);
+
   const handleChange = (event) => {
-    const selectedCountry = event.target.value;
-    setAge(selectedCountry);
-    if (selectedCountry === "") {
-      handleAllCountry();
-    }
+    const selectedCountryCode = event.target.value;
+    setAge(selectedCountryCode);
+    favCard.setSelectedCountry(selectedCountryCode);
+
+    favCard.selectedCountry.push(selectedCountryCode);
   };
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -63,9 +65,10 @@ export default function CountrySelect() {
             color: "#A7B4CA",
           }}
         >
-          <MenuItem onClick={handleAllCountry}>(All)</MenuItem>
-          {country.map((item) => (
-            <MenuItem value={item}>{item}</MenuItem>
+          {country.map((item, index) => (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
           ))}
         </Select>
       </FormControl>

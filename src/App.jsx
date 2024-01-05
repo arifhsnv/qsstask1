@@ -18,8 +18,11 @@ function App() {
           flagsForCountry: [],
           allCountry: [],
           yearData: [],
-          indicatorData: "",
-          yearData: "",
+          indicatorData: [],
+          yearData: [],
+          selectedCountry: [],
+          setSelectedCountry: () => {},
+          initialDataCountry: [],
         }}
       >
         <div className="container">

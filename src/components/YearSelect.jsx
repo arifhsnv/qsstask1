@@ -15,7 +15,7 @@ export default function YearSelect() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://searchartback-production-dc78.up.railway.app/api/years/?countries=Afghanistan%3BAlbania%3BAlgeria%3BAndorra%3BAngola%3BAntigua%20and%20Barbuda%3BArgentina&indicator=Gross%20Domestic%20Product%20billions%20of%20U.S.%20dollars"
+          `https://searchartback-production-dc78.up.railway.app/api/years/?countries=Afghanistan%3BAlbania%3BAlgeria%3BAndorra%3BAngola%3BAntigua%20and%20Barbuda%3BArgentina&indicator=Gross%20Domestic%20Product%20billions%20of%20U.S.%20dollars`
         );
         setyears(response.data);
       } catch (error) {
@@ -31,7 +31,6 @@ export default function YearSelect() {
     setAge(event.target.value);
     favCard.yearData = yearValue;
   };
-
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
